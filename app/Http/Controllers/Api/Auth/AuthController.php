@@ -87,15 +87,19 @@ class AuthController extends ApiController
     }
 
     public function otpConfirmation(Request $request) {
+        //return json_encode($request->otp);
         $this->validate($request, [
             'phone' => 'numeric|exists:customers,phone',
             'otp' => 'numeric|required|digits:4'
         ]);
 
+        
+
         $user = Customer::where(['phone' => $request->phone, 'otp' => $request->otp])
                 ->where('otp_expired', '>=', Carbon::now())
                 ->first();
-
+        
+        
         if(!$user){
             return $this->setStatusCode(401)->makeResponse(null, 'Unauthorized Otp Code!');
         }

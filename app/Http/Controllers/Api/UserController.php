@@ -11,7 +11,9 @@ class UserController extends ApiController
 {
     public function index() {
         $user = Auth::guard('api')->user();
+    
         $data = Customer::find($user->customer_id);
+        
         if(!$data){
             return $this->setStatusCode(401)->makeResponse(null, 'Failed To Retrieve Data', [], 'error');
         }

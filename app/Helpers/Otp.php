@@ -39,7 +39,7 @@ class Otp {
                 $query = $url.'http://sms.nstek.co.id/customer/api/send?api_key='.$api_key.'&destination='.$phone.'&message='.$message;
             }
 
-            //dd($query);
+            var_dump($query);
 
             curl_setopt_array($curl, array(
               CURLOPT_URL => $query,

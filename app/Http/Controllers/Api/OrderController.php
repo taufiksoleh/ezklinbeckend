@@ -34,6 +34,7 @@ class OrderController extends ApiController
                     'order_id'=>$request->order_id
                 );
         $data = $model->getOrderDetail($where)->first();
+        var_dump($data);exit;
         return response()->json([
             'status_code' => 200,
             'status' => 'success',

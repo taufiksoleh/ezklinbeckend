@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'auth', 'namespace' => 'Api'], function() {
+Route::group(['prefix' => 'auth', 'namespace' => 'Api', 'middleware' => ['cors']], function() {
     Route::post('login', 'Auth\AuthController@login');
     Route::post('register', 'Auth\AuthController@register');
     Route::post('otp-confirmation', 'Auth\AuthController@otpConfirmation');
 });
 
-Route::group(['middleware' => ['jwt.verify'], 'namespace' => 'Api'], function() {
+Route::group(['middleware' => ['cors','jwt.verify'], 'namespace' => 'Api'], function() {
     Route::get('profile', 'UserController@index');
     Route::post('edit_profile', 'UserController@edit_profile');
     Route::post('save_bookservice', 'OrderController@save_bookservice');
